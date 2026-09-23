@@ -4,6 +4,15 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
 
+  // const user = await User.create({
+  //   fullName,
+  //   avatar: avatar.url,
+  //   coverImage: coverImage?.url || "",
+  //   email,
+  //   password,
+  //   username: username.toLowerCase()
+  // })
+
 const userSchema = new Schema(
   {
     username: {
@@ -53,10 +62,9 @@ const userSchema = new Schema(
   }
 )
 
-userSchema.pre("save", async function(next) {
-  if (!this.isModified("password")) return next();
+userSchema.pre("save", async function() {
+  if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 10)
-  next()
 })
 
 // custom hooks 

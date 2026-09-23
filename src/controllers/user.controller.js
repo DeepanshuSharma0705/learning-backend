@@ -37,7 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
   })
 
   if (existedUser) {
-    console.log("3 DS does't exist user")
+    console.log("3 DS existing user")
     throw new ApiError(409, "User with email or username already exist ")
   }
 
